@@ -51,6 +51,22 @@ const Posts = () => {
     setActiveId(postId);
   };
 
+  const onUpdate = (post: Post) => {
+    setFilterPost((posts) =>
+      posts.map((pst) => {
+        if (pst.userId === post.id)
+          return {
+            ...pst,
+            body: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati aperiam, dolorum neque rem dignissimos omnis dolor. Optio nam quae, eveniet veritatis praesentium ipsam adipisci dolorem, officiis labore alias sunt totam?",
+          };
+        return pst;
+      })
+    );
+  };
+  const onDelete = (post: Post) => {
+    setFilterPost((posts) => posts.filter((pst) => pst.id === post.id));
+  };
+
   return (
     <div>
       <div className="search">
@@ -66,6 +82,8 @@ const Posts = () => {
                 post={post}
                 onActivePostItem={onActivePostItem}
                 activeId={activeId}
+                onDelete={onDelete}
+                onUpdate={onUpdate}
               />
             );
           })}

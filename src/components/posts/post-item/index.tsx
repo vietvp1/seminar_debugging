@@ -5,16 +5,18 @@ interface IPostItem {
   post: Post;
   activeId: number;
   onActivePostItem: (postId: number) => void;
+  onUpdate: (post: Post) => void;
+  onDelete: (post: Post) => void;
 }
 
 const PostItem: React.FC<IPostItem> = (props) => {
+  const { post, activeId, onActivePostItem, onUpdate, onDelete } = props;
   const [count, setCount] = useState(0);
 
-  const onClickUpdateButton = () => {
-    setCount(count + 1);
-  };
+  // const onClickUpdateButton = () => {
+  //   setCount(count + 1);
+  // };
 
-  const { post, activeId, onActivePostItem } = props;
   return (
     <div
       style={activeId === post.id ? { border: "solid 2px green" } : {}}
@@ -26,10 +28,12 @@ const PostItem: React.FC<IPostItem> = (props) => {
       <div className="post-actions-container">
         <div>
           <div className="post-actions">
-            <button className="update-btn" onClick={onClickUpdateButton}>
+            <button className="update-btn" onClick={() => onUpdate(post)}>
               Update
             </button>
-            {true && <button className="delete-btn">Delete</button>}
+            <button className="delete-btn" onClick={() => onDelete(post)}>
+              Delete
+            </button>
           </div>
         </div>
       </div>
