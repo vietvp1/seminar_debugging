@@ -1,3 +1,4 @@
+import Navbar from "@/components/nav-bar";
 import Posts from "@/components/posts";
 import styles from "@/styles/Home.module.css";
 import { Inter } from "next/font/google";
@@ -15,7 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <Posts />
+        <Navbar />
       </main>
     </>
   );
