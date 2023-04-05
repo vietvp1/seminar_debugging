@@ -12,10 +12,27 @@ const normalize = () => {
     const { data, id } = menu;
     if (data.MenuTitle === "BRANDS")
       return {
-        ...menu,
-        items: brandsMenuData.ordered,
+        id,
+        title: data.MenuTitle,
+        url: data.href,
+        linkonly: data.linkonly,
+        linkonlymobile: data.linkonlymobile,
+        items: brandsMenuData.ordered.map((order) => {
+          return {
+            id: order.id,
+            title: order.data.MenuTitle,
+            url: order.data.Handle,
+            items: order.uiObject.map((item) => {
+              return {
+                title: item.text,
+                url: item.handle,
+              };
+            }),
+          };
+        }),
       };
-    subMenuDisplayData.find((item) => item.id === id);
+
+    const subMenu = subMenuDisplayData.find((item) => item.id === id);
   });
 
   return {};
